@@ -4819,8 +4819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.55, y: 4.01}
-  m_SizeDelta: {x: 170.3188, y: 30}
+  m_AnchoredPosition: {x: -4.4920177, y: 4.01}
+  m_SizeDelta: {x: 202.08913, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1518366176
 Animator:
@@ -5926,16 +5926,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706216138}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1712.4419}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1518366175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.8565292, y: 0}
-  m_SizeDelta: {x: -10.318787, y: 0}
+  m_AnchoredPosition: {x: 0.1843872, y: 0.00001335144}
+  m_SizeDelta: {x: -42.08911, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1706216140
 MonoBehaviour:
@@ -5957,7 +5957,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game name
+  m_text: Social Anxiety
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 517d57f634bcb3e42ad4dc58ed59f5b0, type: 2}
   m_sharedMaterial: {fileID: 548907230934735042, guid: 517d57f634bcb3e42ad4dc58ed59f5b0, type: 2}
