@@ -20,9 +20,9 @@ public class Movement2D : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        /*animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);*/
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     void FixedUpdate()
