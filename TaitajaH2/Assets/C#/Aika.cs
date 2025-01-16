@@ -10,6 +10,8 @@ public class Aika : MonoBehaviour
     public float timeRemanining = 60;
     public bool timeIsRunning = true;
     public TMP_Text timeText;
+    public Animator playerAnim;
+
     void Start()
     {
         timeIsRunning = true;
@@ -28,6 +30,7 @@ public class Aika : MonoBehaviour
             {
                 timeRemanining = 0;
                 timeIsRunning = false;
+                playerAnim.SetBool("Death", false);
             }
         }
     }
