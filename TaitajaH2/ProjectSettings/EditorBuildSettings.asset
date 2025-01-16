@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lvl.unity
     guid: aecd6830fe4dfe343be0f8997cb66e01
+  - enabled: 1
+    path: Assets/Scenes/win.unity
+    guid: ea30ac66f84a1b843ac2da82300be6ae
+  - enabled: 1
+    path: Assets/Scenes/loseByStress.unity
+    guid: f686bc296b0e6784bb867f563d6420e0
+  - enabled: 1
+    path: Assets/Scenes/lose.unity
+    guid: 71dff78125e65724baeee603f57e5610
   m_configObjects: {}
