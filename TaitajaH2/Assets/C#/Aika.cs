@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class Aika : MonoBehaviour
 {
-    public float timeRemanining = 0;
-    public bool timeIsRunning = false;
+    public float timeRemanining = 60;
+    public bool timeIsRunning = true;
     public TMP_Text timeText;
     void Start()
     {
@@ -19,14 +19,14 @@ public class Aika : MonoBehaviour
     {
         if (timeIsRunning)
         {
-            if (timeRemanining >= 0)
+            if (timeRemanining > 0)
             {
-                timeRemanining += Time.deltaTime;
+                timeRemanining -= Time.deltaTime;
                 DisplayTime(timeRemanining);
             }
-
-            if (timeRemanining >= 59)
+            else
             {
+                timeRemanining = 0;
                 timeIsRunning = false;
             }
         }
@@ -34,7 +34,7 @@ public class Aika : MonoBehaviour
 
     void DisplayTime(float timeToDisplay)
     {
-        timeToDisplay += 1;
+        timeToDisplay -= 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
