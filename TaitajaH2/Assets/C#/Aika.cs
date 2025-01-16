@@ -19,13 +19,14 @@ public class Aika : MonoBehaviour
     {
         if (timeIsRunning)
         {
-            if (timeRemanining > 0)
+            if (timeRemanining >= 0)
             {
                 timeRemanining -= Time.deltaTime;
                 DisplayTime(timeRemanining);
             }
             else
             {
+                //kuolema / freezing to death here
                 timeRemanining = 0;
                 timeIsRunning = false;
             }
