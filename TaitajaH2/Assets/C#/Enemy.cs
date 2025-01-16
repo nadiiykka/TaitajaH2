@@ -6,7 +6,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform target;               // Гравець або ціль
     [SerializeField] Vector3 zoneCenter;             // Центр зони
     [SerializeField] float zoneRadius = 10f;         // Радіус зони, в якій ворог почне переслідувати
-    [SerializeField] float safeDistance = 1.3f;        // Відстань безпеки, на яку ворог може наблизитись
+    [SerializeField] float safeDistance = 1.3f;      // Відстань безпеки, на яку ворог може наблизитись
+    private float mediumDistance = 5f;               // Середня відстань, на якій ворог почне говорити
+    [SerializeField] Animator santaTalk;             // Аніматор для анімації "Talk"
     NavMeshAgent agent;
 
     private bool isPlayerInZone = false;
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        santaTalk.SetBool("Talk", false); // Початково "Talk" виключено
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -31,18 +34,27 @@ public class Enemy : MonoBehaviour
             if (distanceToPlayer > safeDistance)
             {
                 agent.SetDestination(target.position);
+
+                // Якщо відстань до гравця менша або рівна середній відстані, ворог починає говорити
+                if (distanceToPlayer <= mediumDistance)
+                {
+                    if (santaTalk != null)
+                    {
+                        santaTalk.SetBool("Talk", true); // Включаємо анімацію "Talk"
+                    }
+                }
+                else
+                {
+                    if (santaTalk != null)
+                    {
+                        santaTalk.SetBool("Talk", false); // Вимикаємо анімацію "Talk"
+                    }
+                }
             }
             else
             {
-                // Встановлюємо нову ціль в такому випадку, щоб ворог зупинявся на safeDistance
-                Vector3 direction = (target.position - agent.transform.position).normalized;
-                Vector3 targetPosition = target.position - direction * safeDistance;
-                agent.SetDestination(targetPosition);
+                agent.ResetPath(); // Встановлюємо шлях до гравця тільки якщо відстань більше безпечної
             }
-        }
-        else
-        {
-            agent.ResetPath();
         }
     }
 
