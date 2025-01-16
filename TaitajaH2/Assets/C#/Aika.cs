@@ -28,10 +28,11 @@ public class Aika : MonoBehaviour
             }
             else
             {
-                //kuolema / freezing to death here
+                
                 timeRemanining = 0;
                 timeIsRunning = false;
                 playerAnim.SetBool("Death", false);
+                StartCoroutine(WaitAndLoadScene(1f, 5));
             }
         }
     }
@@ -42,5 +43,11 @@ public class Aika : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+    }
+
+    private IEnumerator WaitAndLoadScene(float delay, int sceneIndex)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneIndex);
     }
 }

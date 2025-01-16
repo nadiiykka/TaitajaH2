@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StressSlider : MonoBehaviour
@@ -13,6 +14,7 @@ public class StressSlider : MonoBehaviour
     public Animator playerAnim;
 
     private float baseValue = 0; // Базове значення, яке змінюється зовнішніми скриптами
+    private bool isGameOver = false; // Перевірка, щоб уникнути повторного запуску програшу
 
     void Start()
     {
@@ -30,7 +32,7 @@ public class StressSlider : MonoBehaviour
 
     void Update()
     {
-        if (proximitySlider != null && targetObject != null && movingObjects != null && movingObjects.Length > 0)
+        if (proximitySlider != null && targetObject != null && movingObjects != null && movingObjects.Length > 0 && !isGameOver)
         {
             float totalInfluence = 0f;
 
@@ -52,6 +54,12 @@ public class StressSlider : MonoBehaviour
                 {
                     playerAnim.SetBool("Death", true);
                 }
+
+                // Уникнення повторного запуску програшу
+                isGameOver = true;
+
+                // Запускаємо затримку перед завантаженням сцени
+                StartCoroutine(WaitAndLoadScene(1f, 4)); // Затримка 1 секунда, завантаження сцени з індексом 4
             }
             else
             {
@@ -66,5 +74,12 @@ public class StressSlider : MonoBehaviour
     public void AdjustBaseValue(float amount)
     {
         baseValue = Mathf.Clamp(baseValue + amount, 0, 1);
+    }
+
+    // Корутин для затримки перед завантаженням сцени
+    private IEnumerator WaitAndLoadScene(float delay, int sceneIndex)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneIndex);
     }
 }
