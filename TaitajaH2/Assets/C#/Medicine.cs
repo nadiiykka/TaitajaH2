@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Medicine : MonoBehaviour
 {
-    [SerializeField] private int _healthPoints = 10;
-    [SerializeField] private GameObject particles;
-    private StressSlider stressSlider;
+    [SerializeField] private int _healthPoints = 10; // Очки здоров'я
+    [SerializeField] private GameObject particles;  // Частинки
+    [SerializeField] private Slider stressSlider;   // Слайдер стресу
     private Transform player;
 
     private void Awake()
@@ -21,37 +21,6 @@ public class Medicine : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        stressSlider = FindObjectOfType<StressSlider>();
-
-        if (stressSlider == null)
-        {
-            Debug.LogError("StressSlider not found in the scene. Attempting to retry after one frame...");
-            StartCoroutine(TryFindStressSlider());
-        }
-        else
-        {
-            Debug.Log("StressSlider found immediately.");
-        }
-    }
-
-    private IEnumerator TryFindStressSlider()
-    {
-        yield return null;
-
-        stressSlider = FindObjectOfType<StressSlider>();
-
-        if (stressSlider == null)
-        {
-            Debug.LogError("StressSlider still not found. Please check the scene.");
-        }
-        else
-        {
-            Debug.Log("StressSlider found after delay.");
-        }
-    }
-
     public void MedicineDoing()
     {
         if (stressSlider != null)
@@ -61,14 +30,13 @@ public class Medicine : MonoBehaviour
                 Instantiate(particles, player.position, Quaternion.identity);
             }
 
-            // Розрахунок зменшення стресу
-            float adjustment = _healthPoints / 100f; // Перетворюємо очки здоров'я у значення від 0 до 1
-            stressSlider.AdjustBaseValue(-adjustment); // Викликаємо метод StressSlider
-            Destroy(gameObject);
+            // Зменшуємо значення слайдера
+            float adjustment = _healthPoints / 100f; // Перетворення очок здоров'я у значення від 0 до 1
+            stressSlider.value = Mathf.Clamp(stressSlider.value - adjustment, stressSlider.minValue, stressSlider.maxValue);
         }
         else
         {
-            Debug.LogWarning("StressSlider is still not available. Double check if it's in the scene and active.");
+            Debug.LogWarning("StressSlider is not assigned in Medicine script.");
         }
     }
 }

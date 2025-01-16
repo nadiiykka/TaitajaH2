@@ -20,7 +20,8 @@ public class PickUp : MonoBehaviour
                 {
                     inventory.isFull[i] = true;
                     //itemButton.transform.localScale = new Vector3(20, 20, 20);
-                    Instantiate(itemButton, inventory.slots[i].transform, false);
+                    itemButton.SetActive(true);
+                    //Instantiate(itemButton, inventory.slots[i].transform, false);
                     Destroy(gameObject);
                     break;
                 }

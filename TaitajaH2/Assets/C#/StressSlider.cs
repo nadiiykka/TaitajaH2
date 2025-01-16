@@ -22,6 +22,10 @@ public class StressSlider : MonoBehaviour
             proximitySlider.maxValue = 1;
             proximitySlider.value = 0;
         }
+        else
+        {
+            Debug.LogError("ProximitySlider is not assigned in the Inspector.");
+        }
     }
 
     void Update()
@@ -30,41 +34,35 @@ public class StressSlider : MonoBehaviour
         {
             float totalInfluence = 0f;
 
-            // Перебираємо всі об'єкти і додаємо їхні відстані
             foreach (Transform movingObject in movingObjects)
             {
                 float distance = Vector3.Distance(targetObject.position, movingObject.position);
                 distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
-                // Нормалізуємо значення відстані для кожного об'єкта
                 float normalizedValue = 1 - ((distance - minDistance) / (maxDistance - minDistance));
 
-                // Додаємо вплив кожного об'єкта до загального впливу
                 totalInfluence += normalizedValue;
             }
 
-            // Встановлюємо нове значення слайдера, враховуючи сумарний вплив
             proximitySlider.value = Mathf.Clamp(baseValue + totalInfluence, 0, 1);
 
-            // Перевірка, чи слайдер досяг максимального значення
             if (proximitySlider.value >= proximitySlider.maxValue)
             {
                 if (playerAnim != null)
                 {
-                    playerAnim.SetBool("Death", true); // "Death" - це параметр в аніматорі, який вмикається, коли слайдер на максимумі
+                    playerAnim.SetBool("Death", true);
                 }
             }
             else
             {
                 if (playerAnim != null)
                 {
-                    playerAnim.SetBool("Death", false); // Якщо слайдер не на максимумі, змінюємо параметр на false
+                    playerAnim.SetBool("Death", false);
                 }
             }
         }
     }
 
-    // Публічний метод для зміни базового значення
     public void AdjustBaseValue(float amount)
     {
         baseValue = Mathf.Clamp(baseValue + amount, 0, 1);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] float safeDistance = 1.3f;      // Відстань безпеки, на яку ворог може наблизитись
     private float mediumDistance = 5f;               // Середня відстань, на якій ворог почне говорити
     [SerializeField] Animator santaTalk;             // Аніматор для анімації "Talk"
+    [SerializeField] TextMeshProUGUI santaText;      // Компонент тексту
+    [SerializeField]
+    string[] santaPhrases = new string[5];           // Масив фраз для випадкового вибору
     NavMeshAgent agent;
 
     private bool isPlayerInZone = false;
@@ -41,6 +45,13 @@ public class Enemy : MonoBehaviour
                     if (santaTalk != null)
                     {
                         santaTalk.SetBool("Talk", true); // Включаємо анімацію "Talk"
+                    }
+
+                    // Вибір випадкової фрази з масиву та оновлення тексту
+                    if (santaText != null && santaPhrases.Length > 0)
+                    {
+                        int randomIndex = Random.Range(0, santaPhrases.Length); // Генерація випадкового індексу
+                        santaText.text = santaPhrases[randomIndex]; // Встановлюємо текст
                     }
                 }
                 else
